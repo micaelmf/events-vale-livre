@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +24,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::post('/confirm-password', function (Request $request) {
+    if (!Hash::check($request->password, $request->user()->password)) {
+        return back()->withErrors([
+            'password' => ['The provided password does not match our records.']
+        ]);
+    }
+
+    $request->session()->passwordConfirmed();
+
+    return redirect()->intended();
+})->middleware(['auth', 'throttle:6,1']);
+
+require __DIR__ . '/auth.php';
