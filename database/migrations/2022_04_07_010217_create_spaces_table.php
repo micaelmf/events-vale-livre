@@ -20,7 +20,6 @@ class CreateSpacesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreignId('event_id')->constrained();
             $table->foreignId('address_id')->constrained();
             $table->foreignId('user_id')->constrained();
         });

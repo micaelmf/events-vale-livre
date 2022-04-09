@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Space;
 use App\Http\Requests\StoreSpaceRequest;
 use App\Http\Requests\UpdateSpaceRequest;
+use App\Models\Address;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SpaceController extends Controller
 {
@@ -15,7 +18,7 @@ class SpaceController extends Controller
      */
     public function index()
     {
-        //
+        return view('spaces-list', ['spaces' => Space::all()]);
     }
 
     /**
@@ -25,7 +28,9 @@ class SpaceController extends Controller
      */
     public function create()
     {
-        //
+        return view('spaces-create', [
+            'addresses' => Address::all()
+        ]);
     }
 
     /**
@@ -36,7 +41,11 @@ class SpaceController extends Controller
      */
     public function store(StoreSpaceRequest $request)
     {
-        //
+        $space = $request->all();
+        $space['user_id'] = Auth::user()->id;
+        Space::create($space);
+
+        return redirect()->route('spaces');
     }
 
     /**
@@ -56,9 +65,12 @@ class SpaceController extends Controller
      * @param  \App\Models\Space  $space
      * @return \Illuminate\Http\Response
      */
-    public function edit(Space $space)
+    public function edit(Request $request)
     {
-        //
+        return view('spaces-edit', [
+            'space' => Space::find($request->id),
+            'addresses' => Address::all()
+        ]);
     }
 
     /**
@@ -68,9 +80,16 @@ class SpaceController extends Controller
      * @param  \App\Models\Space  $space
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSpaceRequest $request, Space $space)
+    public function update(UpdateSpaceRequest $request)
     {
-        //
+        $space = Space::find($request->id);
+        $space->update([
+            'name' => $request->name,
+            'reference' => $request->reference,
+            'address_id' => $request->address_id
+        ]);
+
+        return redirect()->route('spaces');
     }
 
     /**
