@@ -1,0 +1,35 @@
+:root {
+  /* --padding-main: 18px; */
+  /* --padding-main: 1vh; */
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  background-color: #333;
+  color: lightgrey;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  /* padding: var(--padding-main); */
+  /* width: calc(100vh - var(--padding-main)); */
+}
+
+@media (min-width: 48em) {
+  * {
+    color:red;
+  }
+
+  .content {   
+    width: 960px;
+  }
+}

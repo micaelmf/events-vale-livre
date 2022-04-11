@@ -1,0 +1,15 @@
+:root {
+  --padding-section: 36px;
+}
+
+
+
+body {
+  /* background-color: #1a202c; */
+}
+
+.section-title {
+  font-size: 18pt;
+  font-weight: 700;
+  /* color: lightgrey; */
+}

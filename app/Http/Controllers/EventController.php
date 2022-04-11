@@ -47,7 +47,13 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        $search = 'flisol-vale-2022';
+
+        $event = Event::where('slug', '=', $search)->first();
+
+        return view('event-index', [
+            'event' => $event
+        ]);
     }
 
     /**

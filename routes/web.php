@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\SpaceController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Redirect;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/evento/{slug}', [EventController::class, 'show']);
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
