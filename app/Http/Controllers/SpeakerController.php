@@ -93,7 +93,7 @@ class SpeakerController extends Controller
             'job' => 'required',
         ]);
 
-        $photo = $request->file('photo')->store('speakers_photos', 'public');
+        $photo = $request->file('photo')->store('/', 'public_images_speakers');
 
         $speaker->update([
             'name' => $request->name,
