@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\SpaceController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\SpeakerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -33,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/addresses', [AddressController::class, 'index'])->name('addresses');
         Route::get('/spaces', [SpaceController::class, 'index'])->name('spaces');
+        Route::get('/events', [EventController::class, 'index'])->name('events');
+        Route::get('/speakers', [SpeakerController::class, 'index'])->name('speakers');
     });
 });
 
@@ -56,6 +59,32 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/edit/{id}', [SpaceController::class, 'edit'])->name('edit');
             Route::post('/update/{id}', [SpaceController::class, 'update'])->name('update');
             Route::get('/destroy/{id}', [SpaceController::class, 'destroy'])->name('destroy');
+        });
+    });
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('admin/event')->group(function () {
+        Route::name('event.')->group(function () {
+            Route::get('/show', [EventController::class, 'show'])->name('show');
+            Route::get('/create', [EventController::class, 'create'])->name('create');
+            Route::post('/store', [EventController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [EventController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [EventController::class, 'update'])->name('update');
+            Route::get('/destroy/{id}', [EventController::class, 'destroy'])->name('destroy');
+        });
+    });
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('admin/speaker')->group(function () {
+        Route::name('speaker.')->group(function () {
+            Route::get('/show', [SpeakerController::class, 'show'])->name('show');
+            Route::get('/create', [SpeakerController::class, 'create'])->name('create');
+            Route::post('/store', [SpeakerController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [SpeakerController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [SpeakerController::class, 'update'])->name('update');
+            Route::get('/destroy/{id}', [SpeakerController::class, 'destroy'])->name('destroy');
         });
     });
 });
