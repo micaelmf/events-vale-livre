@@ -32,7 +32,7 @@
                                     @foreach ($speakers as $speaker)
                                         <tr>
                                             <th scope="row">{{ $speaker->id }}</th>
-                                            <td><img src="{{asset("storage/$speaker->photo")}}" alt="" style="width: 50px; height:50px; object-fit: cover;">.</td>
+                                            <td><img src="{{ asset("images/speakers/$speaker->photo") }}" alt="" style="width: 50px; height:50px; object-fit: cover;">.</td>
                                             <td>{{ $speaker->name }}</td>
                                             <td>{{ $speaker->bio }}</td>
                                             <td class="text-right">

@@ -53,6 +53,23 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'public_uploads' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/uploads',
+            'visibility' => 'public'
+        ],
+
+        'public_images_speakers' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/images/speakers',
+            'visibility' => 'public'
+        ],
+
+        'public_images_sponsors' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/images/sponsors',
+            'visibility' => 'public'
+        ],
     ],
 
     /*

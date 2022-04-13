@@ -46,7 +46,7 @@ class SpeakerController extends Controller
             'job' => 'required',
         ]);
 
-        $speaker['photo'] = $request->file('photo')->store('speakers_photos', 'public');
+        $speaker['photo'] = $request->file('photo')->store('/', 'public_images_speakers');
         $speaker['user_id'] = Auth::user()->id;
 
         Speaker::create($speaker);

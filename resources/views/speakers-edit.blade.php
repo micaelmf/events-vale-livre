@@ -43,7 +43,7 @@
 
                                     @if (!empty($speaker->photo))
                                         <img id="preview-image-before-upload"
-                                            src="{{ asset("storage/$speaker->photo") }}"
+                                            src="{{ asset("images/speakers/$speaker->photo") }}"
                                             style="width: 100px; height: 100px; object-fit: cover">
                                         <small>Foto Atual</small>
                                     @else
