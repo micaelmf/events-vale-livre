@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Models\Address;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -15,7 +18,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        return view('events-list', ['events' => Event::all()]);
     }
 
     /**
@@ -25,7 +28,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('events-create', [
+            'addresses' => Address::all()
+        ]);
     }
 
     /**
@@ -36,7 +41,12 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+        $event = $request->all();
+        $event['user_id'] = Auth::user()->id;
+
+        Event::create($event);
+
+        return redirect()->route('events');
     }
 
     /**
@@ -62,9 +72,9 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $event)
+    public function edit(Request $request)
     {
-        //
+        return view('events-edit', ['event' => Event::find($request->id)]);
     }
 
     /**
@@ -76,7 +86,20 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        $event = Event::find($request->id);
+
+        $event->update([
+            'name' => $request->name,
+            'about' => $request->about,
+            'slug' => $request->slug,
+            'place' => $request->place,
+            'year' => $request->year,
+            'edition' => $request->edition,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date
+        ]);
+
+        return redirect()->route('events');
     }
 
     /**
@@ -85,8 +108,12 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy($id)
     {
-        //
+        $event = Event::find($id);
+
+        $event->delete();
+
+        return redirect()->route('events');
     }
 }
