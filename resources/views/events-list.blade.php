@@ -47,10 +47,6 @@
                                                     class="btn btn-sm btn-outline-primary">
                                                     Editar
                                                 </a>
-                                                <a href="{{ route('event.edit', ['id' => $event->id]) }}"
-                                                    class="btn btn-sm btn-primary">
-                                                    Adicionar Detalhes
-                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\SpaceController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\SpeakerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -72,6 +73,19 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/edit/{id}', [EventController::class, 'edit'])->name('edit');
             Route::post('/update/{id}', [EventController::class, 'update'])->name('update');
             Route::get('/destroy/{id}', [EventController::class, 'destroy'])->name('destroy');
+        });
+    });
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('admin/event-detail')->group(function () {
+        Route::name('event.detail.')->group(function () {
+            Route::get('/show', [EventDetailController::class, 'show'])->name('show');
+            Route::get('/create', [EventDetailController::class, 'create'])->name('create');
+            Route::post('/store', [EventDetailController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [EventDetailController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [EventDetailController::class, 'update'])->name('update');
+            Route::get('/destroy/{id}', [EventDetailController::class, 'destroy'])->name('destroy');
         });
     });
 });

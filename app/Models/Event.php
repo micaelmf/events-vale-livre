@@ -19,6 +19,18 @@ class Event extends Model
         'edition',
         'start_date',
         'end_date',
+        'job_call_start_date',
+        'job_call_and_date',
+        'announce_schedule_start_date',
+        'announce_schedule_end_date',
+        'certificates_issuance_start_date',
+        'certificates_issuance_end_date',
+        'subscription_issuance_start_date',
+        'subscription_issuance_end_date',
+        'link_schedule',
+        'link_certificates',
+        'link_photos',
+        'link_registrations',
         'user_id'
     ];
 }
