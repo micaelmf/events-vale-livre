@@ -48,12 +48,13 @@
                                         value="{{ old('edition') ?? $event->edition }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="place">Lugar</label>
-                                    <input type="text" class="form-control" id="place" name="place"
-                                        aria-describedby="placeHelper" value="{{ old('place') ?? $event->place }}"
-                                        placeholder="" required>
-                                    <small id="placeHelper" class="form-text text-muted">Ex.: Universidade Federal do
-                                        Ceará</small>
+                                    <label for="address">Endereço</label>
+                                    <select name="address_id" id="address" class="form-control" required>
+                                        <option value="">Selecione</option>
+                                        @foreach ($addresses as $address)
+                                        <option value="{{ $address->id }}" {{ $address->id == $event->address_id ? 'selected' : '' }} >{{ $address->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="start_date">Data de início</label>

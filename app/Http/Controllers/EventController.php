@@ -28,7 +28,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('events-create');
+        return view('events-create', [
+            'addresses' => Address::all()
+        ]);
     }
 
     /**
@@ -72,7 +74,10 @@ class EventController extends Controller
      */
     public function edit(Request $request)
     {
-        return view('events-edit', ['event' => Event::find($request->id)]);
+        return view('events-edit', [
+            'event' => Event::find($request->id),
+            'addresses' => Address::all()
+        ]);
     }
 
     /**

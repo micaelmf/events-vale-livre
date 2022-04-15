@@ -18,7 +18,6 @@ class CreateEventsTable extends Migration
             $table->string('name');
             $table->string('about')->nullable();
             $table->string('slug');
-            $table->string('place');
             $table->string('year')->nullable();
             $table->string('edition')->nullable();
             $table->dateTime('start_date');

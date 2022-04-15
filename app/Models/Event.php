@@ -14,7 +14,6 @@ class Event extends Model
         'name',
         'about',
         'slug',
-        'place',
         'year',
         'edition',
         'start_date',
@@ -31,6 +30,7 @@ class Event extends Model
         'link_certificates',
         'link_photos',
         'link_registrations',
-        'user_id'
+        'address_id',
+        'user_id',
     ];
 }
