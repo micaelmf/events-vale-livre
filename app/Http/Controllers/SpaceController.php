@@ -98,8 +98,11 @@ class SpaceController extends Controller
      * @param  \App\Models\Space  $space
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Space $space)
+    public function destroy($id)
     {
-        //
+        $space = Space::find($id);
+        $space->delete();
+
+        return redirect()->route('spaces');
     }
 }
