@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Models\Activity;
 use App\Models\Address;
+use App\Models\Speaker;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +32,9 @@ class EventController extends Controller
     public function create()
     {
         return view('events-create', [
-            'addresses' => Address::all()
+            'addresses' => Address::all(),
+            'activities' => Activity::all(),
+            'sponsors' => Sponsor::all()
         ]);
     }
 
@@ -41,10 +46,15 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        $event = $request->all();
+        $event = $request->except(['speakers', 'activities', 'sponsors']);
         $event['user_id'] = Auth::user()->id;
 
-        Event::create($event);
+        $activities = $request->input('activities');
+        $sponsors = $request->input('sponsors');
+        
+        $eventCreated = Event::create($event);
+        $eventCreated->sponsors()->sync($sponsors);
+        $eventCreated->activities()->sync($activities);
 
         return redirect()->route('events');
     }
@@ -74,9 +84,13 @@ class EventController extends Controller
      */
     public function edit(Request $request)
     {
+        $event = Event::find($request->id);
+
+        dd($event);
         return view('events-edit', [
-            'event' => Event::find($request->id),
-            'addresses' => Address::all()
+            'event' => $event,
+            'addresses' => Address::all(),
+            'activities' => Activity::all()
         ]);
     }
 

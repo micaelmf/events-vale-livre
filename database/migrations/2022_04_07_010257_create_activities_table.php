@@ -21,13 +21,11 @@ class CreateActivitiesTable extends Migration
             $table->string('level')->nullable();
             $table->time('duration');
             $table->dateTime('date');
-            $table->string('space')->nullable();
-            $table->longText('attachment')->nullable();
+            $table->longText('observations')->nullable();
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreignId('event_id')->constrained();
             $table->foreignId('speaker_id')->constrained();
             $table->foreignId('space_id')->constrained();
             $table->foreignId('user_id')->constrained();

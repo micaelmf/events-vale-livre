@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Activity extends Model
+class Sponsor extends Model
 {
     use HasFactory;
 
     /**
-     * The events that belong to the activity.
+     * The events that belong to the sponsor.
      */
     public function events()
     {

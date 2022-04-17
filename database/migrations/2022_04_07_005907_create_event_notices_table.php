@@ -15,7 +15,7 @@ class CreateEventNoticesTable extends Migration
     {
         Schema::create('event_notices', function (Blueprint $table) {
             $table->id();
-            $table->string('text');
+            $table->longText('text');
             $table->dateTime('start_date');
             $table->dateTime('and_date');
             $table->timestamps();

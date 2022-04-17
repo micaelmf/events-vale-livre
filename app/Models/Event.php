@@ -33,4 +33,22 @@ class Event extends Model
         'address_id',
         'user_id',
     ];
+
+    /**
+     * The sponsor that belong to the event.
+     */
+    public function sponsors()
+    {
+        return $this->belongsToMany(Sponsor::class)
+            ->withTimestamps();
+    }
+
+    /**
+     * The activity that belong to the event.
+     */
+    public function activities()
+    {
+        return $this->belongsToMany(Activity::class)
+            ->withTimestamps();
+    }
 }

@@ -4,6 +4,18 @@ $(document).ready(function () {
         $(':input').not('input[name="_token"]').val('')
     });
 
+    $('#photo').change(function() {
+        let reader = new FileReader();
+
+        reader.onload = (e) => {
+            $('#preview-image-before-upload').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(this.files[0]);
+    });
+
+    $('#speakers, #activities, #sponsors').select2();
+
     $('form[name="add-event"] #name, form[name="add-event"] #year, form[name="add-event"] #edition').change(function (e) {
         let name = $('form[name="add-event"] #name').val();
 

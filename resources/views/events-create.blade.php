@@ -11,7 +11,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="row">
-                        <div class="col">
+                        <div class="col col-md-6">
                             <form name="add-event" action="{{ route('event.store') }}" method="post">
                                 @csrf
                                 <div class="form-group">
@@ -33,7 +33,8 @@
                                     <input type="text" class="form-control" id="slug" name="slug"
                                         aria-describedby="slugHelper" value="{{ old('slug') }}" placeholder=""
                                         required>
-                                    <small id="slugHelper" class="form-text text-muted">Preenchido automaticamente</small>
+                                    <small id="slugHelper" class="form-text text-muted">Preenchido
+                                        automaticamente</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="year">Year</label>
@@ -64,74 +65,91 @@
                                     <input type="date" class="form-control" id="end_date" name="end_date"
                                         placeholder="@micaelmf" value="{{ old('end_date') }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="job_call_start_date">Chamada de Trabalhos - Início</label>
-                                    <input type="datetime-local" class="form-control" id="job_call_start_date"
-                                        name="job_call_start_date" placeholder=""
-                                        value="{{ old('job_call_start_date') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="job_call_end_date">Chamada de Trabalhos - Fim</label>
-                                    <input type="datetime-local" class="form-control" id="job_call_end_date"
-                                        name="job_call_end_date" placeholder=""
-                                        value="{{ old('job_call_end_date') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="announce_schedule_start_date">Anunciar Programação - Início</label>
-                                    <input type="datetime-local" class="form-control"
-                                        id="announce_schedule_start_date" name="announce_schedule_start_date"
-                                        placeholder="" value="{{ old('announce_schedule_start_date') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="certificates_issuance_start_date">Emissão de Certificados -
-                                        Início</label>
-                                    <input type="datetime-local" class="form-control"
-                                        id="certificates_issuance_start_date" name="certificates_issuance_start_date"
-                                        placeholder="" value="{{ old('certificates_issuance_start_date') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="certificates_issuance_end_date">Emissão de Certificados - Fim</label>
-                                    <input type="datetime-local" class="form-control"
-                                        id="certificates_issuance_end_date" name="certificates_issuance_end_date"
-                                        placeholder="" value="{{ old('certificates_issuance_end_date') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="subscription_issuance_start_date">Inscrições - Início</label>
-                                    <input type="datetime-local" class="form-control"
-                                        id="subscription_issuance_start_date" name="subscription_issuance_start_date"
-                                        placeholder="" value="{{ old('subscription_issuance_start_date') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="subscription_issuance_end_date">Inscrições - Fim</label>
-                                    <input type="datetime-local" class="form-control"
-                                        id="subscription_issuance_end_date" name="subscription_issuance_end_date"
-                                        placeholder="" value="{{ old('subscription_issuance_end_date') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="link_registrations">Link de Inscrições</label>
-                                    <input type="text" class="form-control" id="link_registrations"
-                                        name="link_registrations" placeholder=""
-                                        value="{{ old('link_registrations') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="link_schedule">Link da Programação</label>
-                                    <input type="text" class="form-control" id="link_schedule" name="link_schedule"
-                                        placeholder="" value="{{ old('link_schedule') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="link_certificates">Link dos Certificados</label>
-                                    <input type="text" class="form-control" id="link_certificates"
-                                        name="link_certificates" placeholder=""
-                                        value="{{ old('link_certificates') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="link_photos">Link das Fotos</label>
-                                    <input type="text" class="form-control" id="link_photos" name="link_photos"
-                                        placeholder="" value="{{ old('link_photos') }}">
-                                </div>
+                        </div>
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label for="job_call_start_date">Chamada de Trabalhos - Início</label>
+                                <input type="datetime-local" class="form-control" id="job_call_start_date"
+                                    name="job_call_start_date" placeholder=""
+                                    value="{{ old('job_call_start_date') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="job_call_end_date">Chamada de Trabalhos - Fim</label>
+                                <input type="datetime-local" class="form-control" id="job_call_end_date"
+                                    name="job_call_end_date" placeholder="" value="{{ old('job_call_end_date') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="announce_schedule_start_date">Anunciar Programação - Início</label>
+                                <input type="datetime-local" class="form-control" id="announce_schedule_start_date"
+                                    name="announce_schedule_start_date" placeholder=""
+                                    value="{{ old('announce_schedule_start_date') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="certificates_issuance_start_date">Emissão de Certificados -
+                                    Início</label>
+                                <input type="datetime-local" class="form-control"
+                                    id="certificates_issuance_start_date" name="certificates_issuance_start_date"
+                                    placeholder="" value="{{ old('certificates_issuance_start_date') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="certificates_issuance_end_date">Emissão de Certificados - Fim</label>
+                                <input type="datetime-local" class="form-control" id="certificates_issuance_end_date"
+                                    name="certificates_issuance_end_date" placeholder=""
+                                    value="{{ old('certificates_issuance_end_date') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="subscription_issuance_start_date">Inscrições - Início</label>
+                                <input type="datetime-local" class="form-control"
+                                    id="subscription_issuance_start_date" name="subscription_issuance_start_date"
+                                    placeholder="" value="{{ old('subscription_issuance_start_date') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="subscription_issuance_end_date">Inscrições - Fim</label>
+                                <input type="datetime-local" class="form-control" id="subscription_issuance_end_date"
+                                    name="subscription_issuance_end_date" placeholder=""
+                                    value="{{ old('subscription_issuance_end_date') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="link_registrations">Link de Inscrições</label>
+                                <input type="text" class="form-control" id="link_registrations"
+                                    name="link_registrations" placeholder="" value="{{ old('link_registrations') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="link_schedule">Link da Programação</label>
+                                <input type="text" class="form-control" id="link_schedule" name="link_schedule"
+                                    placeholder="" value="{{ old('link_schedule') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="link_certificates">Link dos Certificados</label>
+                                <input type="text" class="form-control" id="link_certificates"
+                                    name="link_certificates" placeholder="" value="{{ old('link_certificates') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="link_photos">Link das Fotos</label>
+                                <input type="text" class="form-control" id="link_photos" name="link_photos"
+                                    placeholder="" value="{{ old('link_photos') }}">
+                            </div>
+                        </div>
 
-                                <button name="clear" class="btn btn-danger">Limpar</button>
-                                <button type="submit" class="btn btn-primary">Salvar</button>
+                        <div class="col col-md-12">
+                            <label for="start_date">Atividades</label>
+                            <select name="activities[]" id="activities" class="form-control" multiple="multiple"
+                                required>
+                                <option value="">Selecione</option>
+                                @foreach ($activities as $activity)
+                                    <option value="{{ $activity->id }}">{{ $activity->name }}</option>
+                                @endforeach
+                            </select>
+                            <label for="start_date">Patrocinadores</label>
+                            <select name="sponsors[]" id="sponsors" class="form-control" multiple="multiple"
+                                required>
+                                <option value="">Selecione</option>
+                                @foreach ($sponsors as $sponsor)
+                                    <option value="{{ $sponsor->id }}">{{ $sponsor->name }}</option>
+                                @endforeach
+                            </select>
+                            <button name="clear" class="btn btn-danger">Limpar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
                             </form>
                         </div>
                     </div>
@@ -144,20 +162,6 @@
 
 <script type="text/javascript">
     $(document).ready(function(e) {
-
-
-        $('#photo').change(function() {
-
-            let reader = new FileReader();
-
-            reader.onload = (e) => {
-
-                $('#preview-image-before-upload').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(this.files[0]);
-
-        });
 
     });
 </script>
