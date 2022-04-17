@@ -24,4 +24,12 @@ class Speaker extends Model
         'link_youtube',
         'user_id'
     ];
+
+    /**
+     * Get the activities for the speaker.
+     */
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
 }

@@ -86,7 +86,6 @@ class EventController extends Controller
     {
         $event = Event::find($request->id);
 
-        dd($event);
         return view('events-edit', [
             'event' => $event,
             'addresses' => Address::all(),

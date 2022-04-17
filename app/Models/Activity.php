@@ -4,10 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Activity extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'name',
+        'type',
+        'description',
+        'level',
+        'duration',
+        'date',
+        'observations',
+        'status',
+        'speaker_id',
+        'space_id',
+        'user_id',
+    ];
 
     /**
      * The events that belong to the activity.
@@ -15,5 +30,13 @@ class Activity extends Model
     public function events()
     {
         return $this->belongsToMany(Event::class);
+    }
+
+    /**
+     * Get the speaker that owns the activity.
+     */
+    public function speaker()
+    {
+        return $this->belongsTo(Speaker::class);
     }
 }

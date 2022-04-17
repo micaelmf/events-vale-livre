@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Http\Requests\StoreActivityRequest;
 use App\Http\Requests\UpdateActivityRequest;
+use App\Models\Space;
+use App\Models\Speaker;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ActivityController extends Controller
 {
@@ -15,7 +19,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        return view('activities-list', ['activities' => Activity::all()]);
     }
 
     /**
@@ -25,7 +29,10 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        return view('activities-create', [
+            'speakers' => Speaker::all(),
+            'spaces' => Space::all()
+        ]);
     }
 
     /**
@@ -36,7 +43,12 @@ class ActivityController extends Controller
      */
     public function store(StoreActivityRequest $request)
     {
-        //
+        $activity = $request->all();
+        $activity['user_id'] = Auth::user()->id;
+
+        Activity::create($activity);
+
+        return redirect()->route('activities');
     }
 
     /**
@@ -56,9 +68,13 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function edit(Activity $activity)
+    public function edit(Request $request)
     {
-        //
+        return view('activities-edit', [
+            'activity' => Activity::find($request->id),
+            'spaces' => Space::all(),
+            'speakers' => Speaker::all()
+        ]);
     }
 
     /**
@@ -68,9 +84,23 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateActivityRequest $request, Activity $activity)
+    public function update(UpdateActivityRequest $request)
     {
-        //
+        $activity = Activity::find($request->id);
+        $activity->update([
+            'name' => $request->name,
+            'type' => $request->type,
+            'description' => $request->description,
+            'level' => $request->level,
+            'duration' => $request->duration,
+            'date' => $request->date,
+            'observations' => $request->observations,
+            'status' => $request->status,
+            'speaker_id' => $request->speaker_id,
+            'space_id' => $request->space_id,
+        ]);
+
+        return redirect()->route('activities');
     }
 
     /**
@@ -79,8 +109,12 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Activity $activity)
+    public function destroy($id)
     {
-        //
+        $event = Activity::find($id);
+
+        $event->delete();
+
+        return redirect()->route('activities');
     }
 }

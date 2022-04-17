@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\SpaceController;
 use App\Http\Controllers\EventController;
@@ -37,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/spaces', [SpaceController::class, 'index'])->name('spaces');
         Route::get('/events', [EventController::class, 'index'])->name('events');
         Route::get('/speakers', [SpeakerController::class, 'index'])->name('speakers');
+        Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
     });
 });
 
@@ -78,14 +80,14 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::prefix('admin/event-detail')->group(function () {
-        Route::name('event.detail.')->group(function () {
-            Route::get('/show', [EventDetailController::class, 'show'])->name('show');
-            Route::get('/create', [EventDetailController::class, 'create'])->name('create');
-            Route::post('/store', [EventDetailController::class, 'store'])->name('store');
-            Route::get('/edit/{id}', [EventDetailController::class, 'edit'])->name('edit');
-            Route::post('/update/{id}', [EventDetailController::class, 'update'])->name('update');
-            Route::get('/destroy/{id}', [EventDetailController::class, 'destroy'])->name('destroy');
+    Route::prefix('admin/activity')->group(function () {
+        Route::name('activity.')->group(function () {
+            Route::get('/show', [ActivityController::class, 'show'])->name('show');
+            Route::get('/create', [ActivityController::class, 'create'])->name('create');
+            Route::post('/store', [ActivityController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [ActivityController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [ActivityController::class, 'update'])->name('update');
+            Route::get('/destroy/{id}', [ActivityController::class, 'destroy'])->name('destroy');
         });
     });
 });

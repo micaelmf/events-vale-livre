@@ -19,7 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->string('type');
             $table->string('description')->nullable();
             $table->string('level')->nullable();
-            $table->time('duration');
+            $table->time('duration')->nullable();
             $table->dateTime('date');
             $table->longText('observations')->nullable();
             $table->string('status');
