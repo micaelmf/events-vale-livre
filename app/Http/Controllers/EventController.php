@@ -84,12 +84,13 @@ class EventController extends Controller
      */
     public function edit(Request $request)
     {
-        $event = Event::find($request->id);
+        $event = Event::with(['activities', 'sponsors'])->find($request->id);
 
         return view('events-edit', [
             'event' => $event,
             'addresses' => Address::all(),
-            'activities' => Activity::all()
+            'activities' => Activity::all(),
+            'sponsors' => Sponsor::all()
         ]);
     }
 
@@ -102,9 +103,9 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        $event = Event::find($request->id);
+        $eventUpdate = Event::find($request->id);
 
-        $event->update([
+        $eventUpdate->update([
             'name' => $request->name,
             'about' => $request->about,
             'slug' => $request->slug,
@@ -114,6 +115,12 @@ class EventController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date
         ]);
+        
+        $activities = $request->input('activities');
+        $sponsors = $request->input('sponsors');
+        
+        $eventUpdate->sponsors()->sync($sponsors);
+        $eventUpdate->activities()->sync($activities);
 
         return redirect()->route('events');
     }

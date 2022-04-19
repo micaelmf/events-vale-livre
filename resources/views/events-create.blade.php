@@ -140,7 +140,7 @@
                                     <option value="{{ $activity->id }}">{{ $activity->name }}</option>
                                 @endforeach
                             </select>
-                            <label for="start_date">Patrocinadores</label>
+                            <label for="sponsors">Patrocinadores</label>
                             <select name="sponsors[]" id="sponsors" class="form-control" multiple="multiple"
                                 required>
                                 <option value="">Selecione</option>
@@ -148,8 +148,8 @@
                                     <option value="{{ $sponsor->id }}">{{ $sponsor->name }}</option>
                                 @endforeach
                             </select>
-                            <button name="clear" class="btn btn-danger">Limpar</button>
-                            <button type="submit" class="btn btn-primary">Salvar</button>
+                            <button name="clear" class="btn btn-danger mt-3">Limpar</button>
+                            <button type="submit" class="btn btn-primary mt-3">Salvar</button>
                             </form>
                         </div>
                     </div>
