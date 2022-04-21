@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{$event->name}}</title>
+    <title>{{ $event->name }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -35,35 +35,34 @@
     </header>
     <div class="container">
         <div class="section about">
-            <div class="brand">{{ $event->name}}</div>
+            <div class="brand">{{ $event->name }}</div>
             <div class="text">
                 {{ $event->about }}
             </div>
             <div class="buttons">
-                <a class="btn line-blue" href="{{ $event->link_registration}}">Inscreva-se</a>
+                <a class="btn line-blue" href="{{ $event->link_registration }}">Inscreva-se</a>
             </div>
         </div>
 
         <div class="section-title">Apoio</div>
         <div class="section sponsors">
-            <div class="sponsor">
-                <a href="#">
-                    <img src="{{ asset('images/brand-vale-livre.png') }}" alt="Patrocinador">
-                </a>
-                <div class="type">Realização</div>
-            </div>
-            <div class="sponsor">
-                <img src="{{ asset('images/brand-vale-livre.png') }}" alt="Patrocinador">
-                <div class="type">Apoio</div>
-            </div>
-            <div class="sponsor">
-                <img src="{{ asset('images/brand-vale-livre.png') }}" alt="Patrocinador">
-                <div class="type">Patrocinador Diamante</div>
-            </div>
-            <div class="sponsor">
-                <img src="{{ asset('images/brand-vale-livre.png') }}" alt="Patrocinador">
-                <div class="type">Patrocinador Ouro</div>
-            </div>
+            @foreach ($event->sponsors as $sponsor)
+                @if ($sponsor->type == 'Realização' || $sponsor->type == 'Apoio')
+                    <div class="sponsor">
+                        <img src="{{ asset('images/sponsors') }}/{{ $sponsor->image }}" alt="">
+                        <div class="type">{{ $sponsor->type }}</div>
+                    </div>
+                @endif
+            @endforeach
+
+            @foreach ($event->sponsors as $sponsor)
+                @if ($sponsor->type != 'Realização' && $sponsor->type != 'Apoio')
+                    <div class="sponsor">
+                        <img src="{{ asset('images/sponsors') }}/{{ $sponsor->image }}" alt="">
+                        <div class="type">{{ $sponsor->type }}</div>
+                    </div>
+                @endif
+            @endforeach
         </div>
 
         <div class="section-title">Palestrantes</div>

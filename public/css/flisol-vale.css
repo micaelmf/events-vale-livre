@@ -76,7 +76,7 @@ header {
 
 .sponsor img {
   height: var(--width-sponsor);
-  width: var(--width-sponsor);
+  /* width: var(--width-sponsor); */
   object-fit: cover;
 }
 
@@ -115,13 +115,6 @@ header {
 .speaker .name {
   font-size: 14pt;
 }
-
-/* #
-#
-#
-#
-#
-# */
 
 .section.schedule {
   padding: var(--padding-section);
