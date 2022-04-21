@@ -98,31 +98,31 @@
                     <div class="bio">{{ $speaker->bio }}</div>
                     <div class="links">
                         @if ($speaker->link_github)
-                            <a href="https://github.com/" {{ $speaker->link_github }}><i
+                            <a href="https://github.com/{{ $speaker->link_github }}" ><i
                                     class="uil uil-github"></i></a>
                         @endif
                         @if ($speaker->link_linkedin)
-                            <a href="https://www.linkedin.com/in/" {{ $speaker->link_linkedin }}><i
+                            <a href="https://www.linkedin.com/in/{{ $speaker->link_linkedin }}" ><i
                                     class="uil uil-linkedin"></i></a>
                         @endif
                         @if ($speaker->link_instagram)
-                            <a href="https://www.instagram.com/" {{ $speaker->link_instagram }}><i
+                            <a href="https://www.instagram.com/{{ $speaker->link_instagram }}" ><i
                                     class="uil uil-instagram-alt"></i></a>
                         @endif
                         @if ($speaker->link_twitter)
-                            <a href="https://twitter.com/" {{ $speaker->link_twitter }}><i
+                            <a href="https://twitter.com/{{ $speaker->link_twitter }}" ><i
                                     class="uil uil-twitter"></i></a>
                         @endif
                         @if ($speaker->link_youtube)
-                            <a href="https://www.youtube.com/c/" {{ $speaker->link_youtube }}><i
+                            <a href="https://www.youtube.com/c/{{ $speaker->link_youtube }}" ><i
                                     class="uil uil-youtube"></i></a>
                         @endif
                         @if ($speaker->link_medium)
-                            <a href="https://medium.com/" {{ $speaker->link_medium }}><i
+                            <a href="https://medium.com/{{ $speaker->link_medium }}" ><i
                                     class="uil uil-medium-m"></i></a>
                         @endif
                         @if ($speaker->link_facebook)
-                            <a href="https://www.facebook.com/" {{ $speaker->link_facebook }}><i
+                            <a href="https://www.facebook.com/{{ $speaker->link_facebook }}" ><i
                                     class="uil uil-facebook"></i></a>
                         @endif
                     </div>
