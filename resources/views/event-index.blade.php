@@ -145,7 +145,7 @@
                         <div class="hour">{{ date('H:i', strtotime($activity->date)) }}</div>
                         <div class="duration">{{ date('H:i', strtotime($activity->duration)) }}</div>
                         <div class="speaker">{{ $activity->speaker_name }}</div>
-                        <div class="activity">{{ $activity->name }}</div>
+                        <div class="activity">{{ $activity->activity_name }}</div>
                         <div class="local">{{ $activity->space_name }}</div>
                     </div>
                 @endforeach
