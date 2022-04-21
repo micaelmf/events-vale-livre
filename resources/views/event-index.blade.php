@@ -19,7 +19,8 @@
 
 <body>
     <header id="header">
-        <a id="logo" href="">Flisol Vale</a>
+        <img src="{{ asset('images/flisol-horizontal.svg') }}" alt="">
+        {{-- <a id="logo" href=""></a> --}}
         <nav id="nav">
             <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu"
                 aria-expanded="false">Menu
@@ -27,24 +28,44 @@
             </button>
             <ul id="menu" role="menu">
                 <li><a href="#">Sobre</a></li>
-                <li><a href="#">Apoio</a></li>
-                <li><a href="#">Palestrantes</a></li>
-                <li><a href="#">Agenda</a></li>
+                <li><a href="#sponsors">Apoio</a></li>
+                <li><a href="#speakers">Palestrantes</a></li>
+                <li><a href="#schedule">Agenda</a></li>
             </ul>
         </nav>
     </header>
     <div class="container">
         <div class="section about">
-            <div class="brand">{{ $event->name }}</div>
+            <div class="brand"><img src="{{ asset('images/flisol-quadrado.svg') }}" alt=""></div>
+            {{-- <div class="event-name">{{ $event->name }}</div> --}}
             <div class="text">
                 {{ $event->about }}
             </div>
             <div class="buttons">
-                <a class="btn line-blue" href="{{ $event->link_registration }}">Inscreva-se</a>
+                @if (
+                    $event->subscription_issuance_start_date <= date('d-m-Y H:i:s')
+                    && !empty($event->link_registrations)
+                )
+                    <a class="btn solid-blue" href="{{ $event->link_registration }}">Inscreva-se</a>
+                @endif
+                @if (date('d-m-Y H:i:s') > $event->certificates_issuance_start_date && date('d-m-Y H:i:s') <= $event->certificates_issuance_end_date)
+                    <a class="btn line-black" href="{{ $event->link_certificates }}">Emitir certificar</a>
+                @endif
+                @if (
+                    date('d-m-Y H:i:s') > $event->certificates_issuance_start_date 
+                    && date('d-m-Y H:i:s') <= $event->certificates_issuance_end_date
+                    && !empty($event->link_certificates)
+                )
+                    <a class="btn line-black" href="{{ $event->link_certificates }}">Emitir certificar</a>
+                @endif
+
+                @if (!empty($event->link_photos))
+                    <a class="btn solid-blue" href="{{ $event->link_photos }}">Ver fotos</a>
+                @endif
             </div>
         </div>
 
-        <div class="section-title">Apoio</div>
+        <div id="sponsors" class="section-title">Apoio</div>
         <div class="section sponsors">
             @foreach ($event->sponsors as $sponsor)
                 @if ($sponsor->type == 'Realização' || $sponsor->type == 'Apoio')
@@ -65,7 +86,7 @@
             @endforeach
         </div>
 
-        <div class="section-title">Palestrantes</div>
+        <div id="speakers" class="section-title">Palestrantes</div>
         <div class="section speakers">
             @foreach ($speakers as $speaker)
                 <div class="speaker">
@@ -109,7 +130,7 @@
             @endforeach
         </div>
 
-        <div class="section-title">Agenda</div>
+        <div id="schedule" class="section-title">Agenda</div>
         <div class="section schedule">
             <div class="schedule-container">
                 <div class="header">

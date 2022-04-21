@@ -26,6 +26,10 @@ a {
   top: 0;
 }
 
+#header > img {
+  height: 60px;
+}
+
 #menu {
   display: flex;
   list-style: none;
