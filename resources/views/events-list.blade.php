@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col col-md-12">
                             <a href="{{ route('event.create') }}" class="btn btn-sm btn-primary">Novo</a>
-                            <a href="{{ route('event.create') }}" class="btn btn-sm">Leia-me</a>
+                            <a href="{{ route('dashboard') }}" class="btn btn-sm">Leia-me</a>
                         </div>
                     </div>
                 </div>

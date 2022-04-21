@@ -52,37 +52,37 @@
                                 <div class="form-group">
                                     <label for="link_linkedin">Github</label>
                                     <input type="text" class="form-control" id="link_github" name="link_github"
-                                        value="" placeholder="/micaelmf" value="{{ old('link_github') }}">
+                                        value="" placeholder="" value="{{ old('link_github') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_linkedin">Linkedin</label>
                                     <input type="text" class="form-control" id="link_linkedin" name="link_linkedin"
-                                        value="" placeholder="/micaelmf" value="{{ old('link_linkedin') }}">
+                                        value="" placeholder="" value="{{ old('link_linkedin') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_medium">Medium</label>
                                     <input type="text" class="form-control" id="link_medium" name="link_medium"
-                                        value="" placeholder="@micaelmf" value="{{ old('link_medium') }}">
+                                        value="" placeholder="" value="{{ old('link_medium') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_instagram">Instagram</label>
                                     <input type="text" class="form-control" id="link_instagram" name="link_instagram"
-                                        value="" placeholder="@micaelmf" value="{{ old('link_instagram') }}">
+                                        value="" placeholder="" value="{{ old('link_instagram') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_twitter">Twitter</label>
                                     <input type="text" class="form-control" id="link_twitter" name="link_twitter"
-                                        value="" placeholder="@micaelmf" value="{{ old('link_twitter') }}">
+                                        value="" placeholder="" value="{{ old('link_twitter') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_facebook">Facebook</label>
                                     <input type="text" class="form-control" id="link_facebook" name="link_facebook"
-                                        value="" placeholder="/micaelmf" value="{{ old('link_facebook') }}">
+                                        value="" placeholder="" value="{{ old('link_facebook') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_youtube">Youtube</label>
                                     <input type="text" class="form-control" id="link_youtube" name="link_youtube"
-                                        value="" placeholder="/micaelmf" value="{{ old('link_youtube') }}">
+                                        value="" placeholder="" value="{{ old('link_youtube') }}">
                                 </div>
 
                                 <button name="clear" class="btn btn-danger">Limpar</button>

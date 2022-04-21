@@ -1,7 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            <a href="{{ route('addresses') }}">{{ __('Endereços') }}</a>
+            → {{ __('Editar') }}
+            → {{ $address->name }}
         </h2>
     </x-slot>
 
@@ -10,21 +12,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="row">
-                        <div class="col col-md-10">
-                            <h4>Editando {{ $address->name }}</h4>
-                        </div>
-                        <div class="col col-md-2">
-                            <a href="{{ route('addresses') }}" class="btn btn-sm btn-primary float-right">Voltar</a>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col">
                             <form action="{{ route('address.update', ['id' => $address->id]) }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Endereco Completo</label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        aria-describedby="nameHelper" value="{{ $address->name }}" placeholder="">
+                                        aria-describedby="nameHelper" value="{{ $address->name }}" placeholder="" required>
                                     <small id="nameHelper" class="form-text text-muted">Ex.: Universidade Federal do
                                         Ceará</small>
                                 </div>
@@ -52,7 +46,7 @@
                                 <div class="form-group">
                                     <label for="city">Cidade</label>
                                     <input type="text" class="form-control" id="city" name="city" value="{{ $address->city }}"
-                                        placeholder="">
+                                        placeholder="" required>
                                 </div>
                                 <button name="clear" class="btn btn-danger">Limpar</button>
                                 <button type="submit" class="btn btn-primary">Salvar</button>

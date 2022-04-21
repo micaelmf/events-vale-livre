@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            <a href="{{ route('addresses') }}">{{ __('Endereços') }}</a>
+            → {{ __('Novo') }}
         </h2>
     </x-slot>
 
@@ -10,21 +11,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="row">
-                        <div class="col col-md-10">
-                            <h4>Novo Endereço</h4>
-                        </div>
-                        <div class="col col-md-2">
-                            <a href="{{ route('addresses') }}" class="btn btn-sm btn-primary float-right">Voltar</a>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col">
                             <form action="{{ route('address.store') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Endereco Completo</label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        aria-describedby="nameHelper" value="" placeholder="">
+                                        aria-describedby="nameHelper" value="" placeholder="" required>
                                     <small id="nameHelper" class="form-text text-muted">Ex.: Universidade Federal do
                                         Ceará</small>
                                 </div>
@@ -52,7 +45,7 @@
                                 <div class="form-group">
                                     <label for="city">Cidade</label>
                                     <input type="text" class="form-control" id="city" name="city" value=""
-                                        placeholder="">
+                                        placeholder="" required>
                                 </div>
                                 <button name="clear" class="btn btn-danger">Limpar</button>
                                 <button type="submit" class="btn btn-primary">Salvar</button>

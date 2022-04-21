@@ -1,7 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            <a href="{{ route('activities') }}">{{ __('Atividades') }}</a>
+            → {{ __('Editar') }}
+            → {{ old('name') ?? $activity->name }}
         </h2>
     </x-slot>
 
@@ -9,14 +11,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="row">
-                        <div class="col col-md-10">
-                            <h4>Editando {{ $activity->name }}</h4>
-                        </div>
-                        <div class="col col-md-2">
-                            <a href="{{ route('activities') }}" class="btn btn-sm btn-primary float-right">Voltar</a>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col">
                             <form action="{{ route('activity.update', ['id' => $activity->id]) }}" method="post">

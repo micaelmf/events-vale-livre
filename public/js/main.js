@@ -49,11 +49,10 @@ $(document).ready(function () {
             edition = edition.replace(/ {2,}/g, ' ');
             edition = edition.replace(/\s/g, '-');
         }
-
+        
         let slug = name+""+year+""+edition
-        slug.toLowerCase()
 
-        $('form[name="add-event"] #slug').val(slug)
+        $('form[name="add-event"] #slug').val(slug.toLowerCase())
     });
 
     $('form[name="add-event"] #start_date').change(function (e) {

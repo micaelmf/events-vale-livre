@@ -2,7 +2,8 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <a href="{{ route('speakers') }}">{{ __('Palestrantes') }}</a>
-            → {{ __('Novo') }}
+            → {{ __('Editar') }}
+            → {{ old('name') ?? $speaker->name }}
         </h2>
     </x-slot>
 

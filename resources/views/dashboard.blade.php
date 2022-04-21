@@ -11,7 +11,12 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="row">
                         <div class="col col-md-12">
-                            <a href="#" class="">Leia-me</a>
+                            <h3>Leia-me</h3>
+                            <ul>
+                                <li>Antes de cadastrar o espaço, cadastre o endereço</li>
+                                <li>Antes de cadastrar a atividade, cadastre o palestrante</li>
+                                <li>Para ralatar um bug, sugerir melhorias ou novas funcinalidades, envie email para micaelmf@gmail.com e contato@valelivre.org</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

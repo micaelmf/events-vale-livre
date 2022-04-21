@@ -29,14 +29,6 @@
                                     <textarea class="form-control" name="about" id="about" maxlength="254" rows="5">{{ old('about') }}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="slug">Slug</label>
-                                    <input type="text" class="form-control" id="slug" name="slug"
-                                        aria-describedby="slugHelper" value="{{ old('slug') }}" placeholder=""
-                                        required>
-                                    <small id="slugHelper" class="form-text text-muted">Preenchido
-                                        automaticamente</small>
-                                </div>
-                                <div class="form-group">
                                     <label for="year">Year</label>
                                     <input type="number" class="form-control" id="year" name="year" placeholder=""
                                         value="{{ old('year') }}">
@@ -45,6 +37,14 @@
                                     <label for="edition">Edição</label>
                                     <input type="text" class="form-control" id="edition" name="edition" placeholder=""
                                         value="{{ old('edition') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="slug">Slug</label>
+                                    <input type="text" class="form-control" id="slug" name="slug"
+                                        aria-describedby="slugHelper" value="{{ old('slug') }}" placeholder=""
+                                        required>
+                                    <small id="slugHelper" class="form-text text-muted">Preenchido
+                                        automaticamente</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Endereço</label>
@@ -133,16 +133,14 @@
 
                         <div class="col col-md-12">
                             <label for="start_date">Atividades</label>
-                            <select name="activities[]" id="activities" class="form-control" multiple="multiple"
-                                required>
+                            <select name="activities[]" id="activities" class="form-control" multiple="multiple">
                                 <option value="">Selecione</option>
                                 @foreach ($activities as $activity)
                                     <option value="{{ $activity->id }}">{{ $activity->name }}</option>
                                 @endforeach
                             </select>
                             <label for="sponsors">Patrocinadores</label>
-                            <select name="sponsors[]" id="sponsors" class="form-control" multiple="multiple"
-                                required>
+                            <select name="sponsors[]" id="sponsors" class="form-control" multiple="multiple">
                                 <option value="">Selecione</option>
                                 @foreach ($sponsors as $sponsor)
                                     <option value="{{ $sponsor->id }}">{{ $sponsor->name }}</option>

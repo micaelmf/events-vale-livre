@@ -10,13 +10,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="row">
-                        <div class="col col-md-10">
-                            <h4>Lista de Espaços</h4>
-                        </div>
                         <div class="col col-md-2">
-                            <a href="{{ route('space.create') }}" class="btn btn-sm btn-primary float-right">Novo</a>
+                            <a href="{{ route('space.create') }}" class="btn btn-sm btn-primary">Novo</a>
                         </div>
                     </div>
+                </div>
+                <div class="p-6 bg-white border-b border-gray-200">
                     <div class="row">
                         <div class="col col-md-12">
                             <table class="table table-striped table-hover">
