@@ -4,7 +4,7 @@ $(document).ready(function () {
         $(':input').not('input[name="_token"]').val('')
     });
 
-    $('#photo').change(function() {
+    $('#photo, #image').change(function() {
         let reader = new FileReader();
 
         reader.onload = (e) => {

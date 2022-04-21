@@ -20,6 +20,7 @@ class CreateSponsorsTable extends Migration
             $table->string('type');
             $table->string('image');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreignId('user_id')->constrained();
         });

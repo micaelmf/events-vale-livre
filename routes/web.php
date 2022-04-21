@@ -5,6 +5,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\SpaceController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SpeakerController;
+use App\Http\Controllers\SponsorController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/events', [EventController::class, 'index'])->name('events');
         Route::get('/speakers', [SpeakerController::class, 'index'])->name('speakers');
         Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
+        Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors');
     });
 });
 
@@ -100,6 +102,19 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/edit/{id}', [SpeakerController::class, 'edit'])->name('edit');
             Route::post('/update/{id}', [SpeakerController::class, 'update'])->name('update');
             Route::get('/destroy/{id}', [SpeakerController::class, 'destroy'])->name('destroy');
+        });
+    });
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('admin/sponsor')->group(function () {
+        Route::name('sponsor.')->group(function () {
+            Route::get('/show', [SponsorController::class, 'show'])->name('show');
+            Route::get('/create', [SponsorController::class, 'create'])->name('create');
+            Route::post('/store', [SponsorController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [SponsorController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [SponsorController::class, 'update'])->name('update');
+            Route::get('/destroy/{id}', [SponsorController::class, 'destroy'])->name('destroy');
         });
     });
 });

@@ -27,11 +27,11 @@
                     <x-nav-link :href="route('activities')" :active="request()->routeIs('activities')">
                         {{ __('Atividades') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('events')" :active="request()->routeIs('events')">
-                        {{ __('Eventos') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('sponsors')" :active="request()->routeIs('sponsors')">
                         {{ __('Patrocinadores') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('events')" :active="request()->routeIs('events')">
+                        {{ __('Eventos') }}
                     </x-nav-link>
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Avisos') }}
@@ -101,11 +101,11 @@
             <x-responsive-nav-link :href="route('activities')" :active="request()->routeIs('activities')">
                 {{ __('Atividades') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('events')" :active="request()->routeIs('events')">
-                {{ __('Eventos') }}
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('sponsors')" :active="request()->routeIs('sponsors')">
                 {{ __('Patrocinadores') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('events')" :active="request()->routeIs('events')">
+                {{ __('Eventos') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Avisos') }}

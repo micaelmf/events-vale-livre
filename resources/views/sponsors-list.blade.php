@@ -1,0 +1,58 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Patrocinadores') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <div class="row">
+                        <div class="col col-md-2">
+                            <a href="{{ route('sponsor.create') }}" class="btn btn-sm btn-primary">Novo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Marca</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col" class="text-right">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($sponsors as $sponsor)
+                                        <tr>
+                                            <th scope="row">{{ $sponsor->id }}</th>
+                                            <td><img src="{{ asset("images/sponsors/$sponsor->image") }}" alt="" style="width: 50px; height:50px; object-fit: cover;">.</td>
+                                            <td>{{ $sponsor->name }}</td>
+                                            <td>{{ $sponsor->about }}</td>
+                                            <td class="text-right">
+                                                <a href="{{ route('sponsor.destroy', ['id' => $sponsor->id]) }}"
+                                                    class="btn btn-sm btn-outline-danger">
+                                                    Excluir
+                                                </a>
+                                                <a href="{{ route('sponsor.edit', ['id' => $sponsor->id]) }}"
+                                                    class="btn btn-sm btn-outline-primary">
+                                                    Editar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
