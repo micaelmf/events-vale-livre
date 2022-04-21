@@ -8,8 +8,12 @@
 body {
   width: 100%;
   height: 100%;
-  background-color: #1a202c;
-  color: lightgray;
+  color: black;
+  background: rgb(148, 187, 233, 1);
+  background: -moz-linear-gradient(329deg, rgba(238, 229, 174, 1) 0%, rgba(148, 187, 233, 1) 100%);
+  background: -webkit-linear-gradient(329deg, rgba(238, 229, 174, 1) 0%, rgba(148, 187, 233, 1) 100%);
+  background: linear-gradient(329deg, rgba(238, 229, 174, 1) 0%, rgba(148, 187, 233, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eee5ae", endColorstr="#94bbe9", GradientType=1);
 }
 
 header {
@@ -81,7 +85,7 @@ header {
   text-align: center;
   margin: 0 auto;
   border-radius: 8px;
-  color: lightgray;
+  /* color: lightgray; */
 }
 
 .section.speakers {
@@ -105,45 +109,60 @@ header {
   height: var(--width-speaker-image);
   width: var(--width-speaker-image);
   object-fit: cover;
+  border-radius: 50%;
 }
 
 .speaker .name {
   font-size: 14pt;
-  color: lightgray;
 }
+
+/* #
+#
+#
+#
+#
+# */
 
 .section.schedule {
   padding: var(--padding-section);
   overflow: scroll;
+  overflow-y: hidden;
+  color: black;
 }
 
 .schedule-container {
   display: grid;
-  grid-template-columns: minmax(110px, 1fr) minmax(240px, 3fr) minmax(160px, 1fr) minmax(140px, 1fr);
 }
 
-.schedule-container > div {
-  padding: 8px;
-  border-bottom: 1px solid darkgray;
-  background-color: black;
-}
-
-.schedule-container > div {
-  border-bottom: 1px solid #444;
+.schedule-container > .header, .schedule-container > .line {
+  display: grid;
+  grid-template-columns: minmax(60px, 1fr) minmax(60px, 1fr) minmax(160px, 1fr) minmax(240px, 3fr) minmax(140px, 1fr);
 }
 
 .schedule-container .header {
+  color: lightgrey;
   background-color: #222;
   font-size: 11pt;
   font-weight: 600;
 }
 
+.schedule-container>div {
+  padding: 8px;
+  border-bottom: 1px solid darkgray;
+  background-color: beige;
+}
+
+.schedule-container>div {
+  border-bottom: 1px solid #444;
+}
+
+
 
 .btn {
   border-width: 2px;
   border-style: solid;
-  border-color: lightgray;
-  color: lightgray;
+  /* border-color: lightgray; */
+  /* color: lightgray; */
   font-size: 12pt;
   padding: 4px 8px;
 }
@@ -159,4 +178,9 @@ header {
   border-color: lightblue;
   color: lightblue;
   background-color: transparent;
+}
+
+a>i {
+  font-size: 20pt;
+  color: black;
 }

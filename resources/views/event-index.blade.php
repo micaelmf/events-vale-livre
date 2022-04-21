@@ -35,14 +35,12 @@
     </header>
     <div class="container">
         <div class="section about">
-            <div class="brand">Flisol Vale 2022</div>
+            <div class="brand">{{ $event->name}}</div>
             <div class="text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quod quia quam recusandae, excepturi
-                debitis minima voluptatum quisquam soluta dignissimos totam sed est eligendi eaque quo obcaecati hic
-                porro quas.
+                {{ $event->about }}
             </div>
             <div class="buttons">
-                <a class="btn line-blue" href="#">Inscreva-se</a>
+                <a class="btn line-blue" href="{{ $event->link_registration}}">Inscreva-se</a>
             </div>
         </div>
 

@@ -34,7 +34,7 @@
                                 <div class="form-group">
                                     <label for="photo">Foto</label>
                                     <input type="file" class="form-control-file" id="photo" name="photo"
-                                        aria-describedby="photoHelper" value="" required>
+                                        aria-describedby="photoHelper" value="">
                                     <small id="photoHelper" class="form-text text-muted">Faça as edições necessárias
                                         antes do envio. Tamanho máximo de 2MB</small>
                                     @error('photo')
@@ -65,43 +65,43 @@
                                 <div class="form-group">
                                     <label for="link_linkedin">Github</label>
                                     <input type="text" class="form-control" id="link_github" name="link_github"
-                                        placeholder="/micaelmf"
+                                        placeholder=""
                                         value="{{ old('link_github') ?? $speaker->link_github }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_linkedin">Linkedin</label>
                                     <input type="text" class="form-control" id="link_linkedin" name="link_linkedin"
-                                        placeholder="/micaelmf"
+                                        placeholder=""
                                         value="{{ old('link_linkedin') ?? $speaker->link_linkedin }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_medium">Medium</label>
                                     <input type="text" class="form-control" id="link_medium" name="link_medium"
-                                        placeholder="@micaelmf"
+                                        placeholder=""
                                         value="{{ old('link_medium') ?? $speaker->link_medium }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_instagram">Instagram</label>
                                     <input type="text" class="form-control" id="link_instagram" name="link_instagram"
-                                        placeholder="@micaelmf"
+                                        placeholder=""
                                         value="{{ old('link_instagram') ?? $speaker->link_instagram }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_twitter">Twitter</label>
                                     <input type="text" class="form-control" id="link_twitter" name="link_twitter"
-                                        placeholder="@micaelmf"
+                                        placeholder=""
                                         value="{{ old('link_twitter') ?? $speaker->link_twitter }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_facebook">Facebook</label>
                                     <input type="text" class="form-control" id="link_facebook" name="link_facebook"
-                                        placeholder="/micaelmf"
+                                        placeholder=""
                                         value="{{ old('link_facebook') ?? $speaker->link_facebook }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_youtube">Youtube</label>
                                     <input type="text" class="form-control" id="link_youtube" name="link_youtube"
-                                        placeholder="/micaelmf"
+                                        placeholder=""
                                         value="{{ old('link_youtube') ?? $speaker->link_youtube }}">
                                 </div>
 

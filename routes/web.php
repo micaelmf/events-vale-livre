@@ -4,7 +4,6 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\SpaceController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\SpeakerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -26,7 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/evento/{slug}', [EventController::class, 'show']);
+Route::get('/evento/{name}/{year}/{edition}', [EventController::class, 'show']);
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {

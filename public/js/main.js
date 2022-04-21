@@ -50,7 +50,10 @@ $(document).ready(function () {
             edition = edition.replace(/\s/g, '-');
         }
 
-        $('form[name="add-event"] #slug').val(name+""+year+""+edition)
+        let slug = name+""+year+""+edition
+        slug.toLowerCase()
+
+        $('form[name="add-event"] #slug').val(slug)
     });
 
     $('form[name="add-event"] #start_date').change(function (e) {

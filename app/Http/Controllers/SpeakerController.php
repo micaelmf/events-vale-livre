@@ -89,11 +89,15 @@ class SpeakerController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required',
-            'photo' => 'required|image|mimes:jpg,png,jpeg,gif|max:2048',
+            'photo' => 'image|mimes:jpg,png,jpeg,gif|max:2048',
             'job' => 'required',
         ]);
 
-        $photo = $request->file('photo')->store('/', 'public_images_speakers');
+        $photo = $speaker->photo;
+
+        if(!empty($request->file('photo'))){
+            $photo = $request->file('photo')->store('/', 'public_images_speakers');
+        }
 
         $speaker->update([
             'name' => $request->name,
