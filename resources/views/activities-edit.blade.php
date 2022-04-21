@@ -35,8 +35,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Descrição</label>
-                                    <input type="text" class="form-control" id="description" name="description"
-                                        aria-describedby="descriptionHelper" value="{{ $activity->description }}" placeholder="" required>
+                                    <textarea class="form-control" id="description" name="description" aria-describedby="descriptionHelper" rows="4" required>{{ $activity->description }}</textarea>
                                     <small id="descriptionHelper" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
@@ -52,15 +51,14 @@
                                     <small id="durationHelper" class="form-text text-muted">E.: 00:50</small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="date">Data</label>
-                                    <input type="date" class="form-control" id="date" name="date"
-                                        aria-describedby="dateHelper" value="{{ date('Y-m-d', strtotime($activity->date)) }}" placeholder="" required>
+                                    <label for="date">Data e Hora</label>
+                                    <input type="datetime-local" class="form-control" id="date" name="date"
+                                        aria-describedby="dateHelper" value="{{ date('Y-m-d\TH:i:s', strtotime($activity->date)) }}" placeholder="" required>
                                     <small id="dateHelper" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
                                     <label for="observations">Observações</label>
-                                    <input type="input" class="form-control" id="observations" name="observations"
-                                        aria-describedby="observationsHelper" value="{{ $activity->observations }}" placeholder="" required>
+                                    <textarea class="form-control" id="observations" name="observations" aria-describedby="observationsHelper" rows="4">{{ $activity->observations }}</textarea>
                                     <small id="observationsHelper" class="form-text text-muted">Ex.: Links, requisitos e etc.</small>
                                 </div>
                                 <div class="form-group">

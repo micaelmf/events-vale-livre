@@ -36,8 +36,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Description">Descrição</label>
-                                    <input type="text" class="form-control" id="Description" name="Description"
-                                        aria-describedby="DescriptionHelper" value="" placeholder="" required>
+                                    <textarea class="form-control" id="description" name="description" aria-describedby="descriptionHelper" rows="4" required></textarea>
                                     <small id="DescriptionHelper" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
@@ -53,15 +52,14 @@
                                     <small id="durationHelper" class="form-text text-muted">E.: 00:50</small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="date">Data</label>
-                                    <input type="date" class="form-control" id="date" name="date"
+                                    <label for="date">Data e Hora</label>
+                                    <input type="datetime-local" class="form-control" id="date" name="date"
                                         aria-describedby="dateHelper" value="" placeholder="" required>
                                     <small id="dateHelper" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
                                     <label for="observations">Observações</label>
-                                    <input type="input" class="form-control" id="observations" name="observations"
-                                        aria-describedby="observationsHelper" value="" placeholder="" required>
+                                    <textarea class="form-control" id="observations" name="observations" aria-describedby="observationsHelper" rows="4"></textarea>
                                     <small id="observationsHelper" class="form-text text-muted">Ex.: Links, requisitos e etc.</small>
                                 </div>
                                 <div class="form-group">

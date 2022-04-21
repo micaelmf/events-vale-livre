@@ -39,4 +39,12 @@ class Activity extends Model
     {
         return $this->belongsTo(Speaker::class);
     }
+
+    /**
+     * Get the space that owns the activity.
+     */
+    public function space()
+    {
+        return $this->belongsTo(Space::class);
+    }
 }

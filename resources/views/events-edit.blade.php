@@ -72,44 +72,44 @@
                                 <label for="job_call_start_date">Chamada de Trabalhos - Início</label>
                                 <input type="datetime-local" class="form-control" id="job_call_start_date"
                                     name="job_call_start_date" placeholder=""
-                                    value="{{ date('Y-m-d H:i', strtotime($event->job_call_start_date))}}">
+                                    value="{{ date('Y-m-d\TH:i', strtotime($event->job_call_start_date))}}">
                             </div>
                             <div class="form-group">
                                 <label for="job_call_end_date">Chamada de Trabalhos - Fim</label>
                                 <input type="datetime-local" class="form-control" id="job_call_end_date"
                                     name="job_call_end_date" placeholder="" 
-                                    value="{{ date('Y-m-d H:i', strtotime($event->job_call_end_date))}}">
+                                    value="{{ date('Y-m-d\TH:i', strtotime($event->job_call_end_date))}}">
                             </div>
                             <div class="form-group">
                                 <label for="announce_schedule_start_date">Anunciar Programação - Início</label>
                                 <input type="datetime-local" class="form-control" id="announce_schedule_start_date"
                                     name="announce_schedule_start_date" placeholder=""
-                                    value="{{ date('Y-m-d H:i', strtotime($event->announce_schedule_start_date))}}">
+                                    value="{{ date('Y-m-d\TH:i', strtotime($event->announce_schedule_start_date))}}">
                             </div>
                             <div class="form-group">
                                 <label for="certificates_issuance_start_date">Emissão de Certificados -
                                     Início</label>
                                 <input type="datetime-local" class="form-control" id="certificates_issuance_start_date" 
                                     name="certificates_issuance_start_date" placeholder=""
-                                    value="{{ date('Y-m-d H:i', strtotime($event->certificates_issuance_start_date))}}">
+                                    value="{{ date('Y-m-d\TH:i', strtotime($event->certificates_issuance_start_date))}}">
                             </div>
                             <div class="form-group">
                                 <label for="certificates_issuance_end_date">Emissão de Certificados - Fim</label>
                                 <input type="datetime-local" class="form-control" id="certificates_issuance_end_date"
                                     name="certificates_issuance_end_date" placeholder=""
-                                    value="{{ date('Y-m-d H:i', strtotime($event->certificates_issuance_end_date))}}">
+                                    value="{{ date('Y-m-d\TH:i', strtotime($event->certificates_issuance_end_date))}}">
                             </div>
                             <div class="form-group">
                                 <label for="subscription_issuance_start_date">Inscrições - Início</label>
                                 <input type="datetime-local" class="form-control" id="subscription_issuance_start_date"
                                     name="subscription_issuance_start_date" placeholder="" 
-                                    value="{{ date('Y-m-d H:i', strtotime($event->subscription_issuance_start_date))}}">
+                                    value="{{ date('Y-m-d\TH:i', strtotime($event->subscription_issuance_start_date))}}">
                             </div>
                             <div class="form-group">
                                 <label for="subscription_issuance_end_date">Inscrições - Fim</label>
                                 <input type="datetime-local" class="form-control"id="subscription_issuance_end_date"
                                     name="subscription_issuance_end_date" placeholder=""
-                                    value="{{ date('Y-m-d H:i', strtotime($event->subscription_issuance_end_date))}}">
+                                    value="{{ date('Y-m-d\TH:i', strtotime($event->subscription_issuance_end_date))}}">
                             </div>
                             <div class="form-group">
                                 <label for="link_registrations">Link de Inscrições</label>

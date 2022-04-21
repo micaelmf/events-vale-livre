@@ -19,7 +19,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        return view('activities-list', ['activities' => Activity::all()]);
+        return view('activities-list', ['activities' => Activity::with(['speaker','space'])->get()]);
     }
 
     /**
@@ -44,6 +44,7 @@ class ActivityController extends Controller
     public function store(StoreActivityRequest $request)
     {
         $activity = $request->all();
+        $activity['date'] = date('Y-m-d H:i:s', strtotime($activity['date']));
         $activity['user_id'] = Auth::user()->id;
 
         Activity::create($activity);
@@ -71,7 +72,7 @@ class ActivityController extends Controller
     public function edit(Request $request)
     {
         return view('activities-edit', [
-            'activity' => Activity::find($request->id),
+            'activity' => Activity::with(['space', 'speaker'])->find($request->id),
             'spaces' => Space::all(),
             'speakers' => Speaker::all()
         ]);
@@ -93,7 +94,7 @@ class ActivityController extends Controller
             'description' => $request->description,
             'level' => $request->level,
             'duration' => $request->duration,
-            'date' => $request->date,
+            'date' => date('Y-m-d H:i:s', strtotime($request->date)),
             'observations' => $request->observations,
             'status' => $request->status,
             'speaker_id' => $request->speaker_id,

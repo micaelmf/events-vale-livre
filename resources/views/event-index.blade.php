@@ -5,13 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Flisol Vale</title>
+    <title>{{$event->name}}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.3/css/line.css">
     <link rel="stylesheet" href="{{ asset('css/menu-flisol-vale.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flisol-vale.css') }}">
 </head>
@@ -42,14 +43,15 @@
             </div>
             <div class="buttons">
                 <a class="btn line-blue" href="#">Inscreva-se</a>
-                <!-- <a class="btn line-blue" href="#">Saiba Mais</a> -->
             </div>
         </div>
 
         <div class="section-title">Apoio</div>
         <div class="section sponsors">
             <div class="sponsor">
-                <img src="{{ asset('images/brand-vale-livre.png') }}" alt="Patrocinador">
+                <a href="#">
+                    <img src="{{ asset('images/brand-vale-livre.png') }}" alt="Patrocinador">
+                </a>
                 <div class="type">Realização</div>
             </div>
             <div class="sponsor">
@@ -68,99 +70,67 @@
 
         <div class="section-title">Palestrantes</div>
         <div class="section speakers">
-            <div class="speaker">
-                <div>
-                    <img src="{{ asset('images/brand-vale-livre.png') }}" alt="Patrocinador">
+            @foreach ($speakers as $speaker)
+                <div class="speaker">
+                    <div>
+                        <img src="{{ asset('images/speakers') }}/{{ $speaker->photo }}"
+                            alt="Imagem do palestrante {{ $speaker->name }}">
+                    </div>
+                    <div class="name"><strong>{{ $speaker->name }}</strong></div>
+                    <div class="bio">{{ $speaker->bio }}</div>
+                    <div class="links">
+                        @if ($speaker->link_github)
+                            <a href="https://github.com/" {{ $speaker->link_github }}><i
+                                    class="uil uil-github"></i></a>
+                        @endif
+                        @if ($speaker->link_linkedin)
+                            <a href="https://www.linkedin.com/in/" {{ $speaker->link_linkedin }}><i
+                                    class="uil uil-linkedin"></i></a>
+                        @endif
+                        @if ($speaker->link_instagram)
+                            <a href="https://www.instagram.com/" {{ $speaker->link_instagram }}><i
+                                    class="uil uil-instagram-alt"></i></a>
+                        @endif
+                        @if ($speaker->link_twitter)
+                            <a href="https://twitter.com/" {{ $speaker->link_twitter }}><i
+                                    class="uil uil-twitter"></i></a>
+                        @endif
+                        @if ($speaker->link_youtube)
+                            <a href="https://www.youtube.com/c/" {{ $speaker->link_youtube }}><i
+                                    class="uil uil-youtube"></i></a>
+                        @endif
+                        @if ($speaker->link_medium)
+                            <a href="https://medium.com/" {{ $speaker->link_medium }}><i
+                                    class="uil uil-medium-m"></i></a>
+                        @endif
+                        @if ($speaker->link_facebook)
+                            <a href="https://www.facebook.com/" {{ $speaker->link_facebook }}><i
+                                    class="uil uil-facebook"></i></a>
+                        @endif
+                    </div>
                 </div>
-                <div class="name">Name Speaker</div>
-                <div class="bio">Biograph of speaker Biograph of speaker Biograph of speaker Biograph of
-                    speaker Biograph of speaker Biograph of speaker Biograph of speaker</div>
-                <div class="links">
-                    <a href="#">Github</a>
-                    <a href="#">Linkedin</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Youtube</a>
-                    <a href="#">Medium</a>
-                </div>
-            </div>
-            <div class="speaker">
-                <div>
-                    <img src="{{ asset('images/brand-vale-livre.png') }}" alt="Patrocinador">
-                </div>
-                <div class="name">Name Speaker</div>
-                <div class="bio">Biograph of speaker Biograph of speaker Biograph of speaker Biograph of
-                    speaker Biograph of speaker Biograph of speaker Biograph of speaker</div>
-                <div class="links">
-                    <a href="#">Github</a>
-                    <a href="#">Linkedin</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Youtube</a>
-                    <a href="#">Medium</a>
-                </div>
-            </div>
-            <div class="speaker">
-                <div>
-                    <img src="{{ asset('images/brand-vale-livre.png') }}" alt="Patrocinador">
-                </div>
-                <div class="name">Name Speaker</div>
-                <div class="bio">Biograph of speaker Biograph of speaker Biograph of speaker Biograph of
-                    speaker Biograph of speaker Biograph of speaker Biograph of speaker Diamante</div>
-                <div class="links">
-                    <a href="#">Github</a>
-                    <a href="#">Linkedin</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Youtube</a>
-                    <a href="#">Medium</a>
-                </div>
-            </div>
-            <div class="speaker">
-                <div>
-                    <img src="{{ asset('images/brand-vale-livre.png') }}" alt="Patrocinador">
-                </div>
-                <div class="name">Name Speaker</div>
-                <div class="bio">Biograph of speaker Biograph of speaker Biograph of speaker Biograph of
-                    speaker Biograph of speaker Biograph of speaker Biograph of speaker Ouro</div>
-                <div class="links">
-                    <a href="#">Github</a>
-                    <a href="#">Linkedin</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Youtube</a>
-                    <a href="#">Medium</a>
-                </div>
-            </div>
+            @endforeach
         </div>
 
         <div class="section-title">Agenda</div>
         <div class="section schedule">
             <div class="schedule-container">
-                <div class="hour header">Horário</div>
-                <div class="activity header">Atividade</div>
-                <div class="speaker header">Palestrate</div>
-                <div class="local header">Local</div>
-                <div class="hour">08h - 8h30</div>
-                <div class="activity">Abertura</div>
-                <div class="speaker">Micael Ferreira</div>
-                <div class="local">Auditório</div>
-                <div class="hour">8h30 - 9h20</div>
-                <div class="activity">Palestra: Seu site incrível com Wordpress</div>
-                <div class="speaker">Micael Ferreira</div>
-                <div class="local">Auditório</div>
-                <div class="hour">8h30 - 12h</div>
-                <div class="activity">Oficina: Css com Less</div>
-                <div class="speaker">Micael Ferreira</div>
-                <div class="local">Laboratório 1</div>
-                <div class="hour">8h30 - 12h</div>
-                <div class="activity">Oficina: Vamos Matar o Javacript</div>
-                <div class="speaker">Hideljares Martins</div>
-                <div class="local">Laboratório 2</div>
+                <div class="header">
+                    <div class="hour">Horário</div>
+                    <div class="hour">Duração</div>
+                    <div class="speaker">Palestrate</div>
+                    <div class="activity">Atividade</div>
+                    <div class="local">Local</div>
+                </div>
+                @foreach ($activities as $activity)
+                    <div class="line">
+                        <div class="hour">{{ date('H:i', strtotime($activity->date)) }}</div>
+                        <div class="duration">{{ date('H:i', strtotime($activity->duration)) }}</div>
+                        <div class="speaker">{{ $activity->speaker_name }}</div>
+                        <div class="activity">{{ $activity->name }}</div>
+                        <div class="local">{{ $activity->space_name }}</div>
+                    </div>
+                @endforeach
             </div>
         </div>
 

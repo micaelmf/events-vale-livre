@@ -24,10 +24,10 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Nome</th>
-                                        {{-- <th scope="col">Palestrante</th> --}}
                                         <th scope="col">Tipo</th>
-                                        <th scope="col">Duração</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Palestrante</th>
+                                        <th scope="col">Espaço</th>
                                         <th scope="col" class="text-right">Ações</th>
                                     </tr>
                                 </thead>
@@ -36,10 +36,10 @@
                                         <tr>
                                             <th scope="row">{{ $activity->id }}</th>
                                             <td>{{ $activity->name }}</td>
-                                            {{-- <td>{{ $activity->speaker->name }}</td> --}}
                                             <td>{{ $activity->type }}</td>
-                                            <td>{{ $activity->duration }}</td>
                                             <td>{{ $activity->status }}</td>
+                                            <td>{{ $activity->speaker->name }}</td>
+                                            <td>{{ $activity->space->name ?? 'Nenhum' }}</td>
                                             <td class="text-right">
                                                 <a href="{{ route('activity.destroy', ['id' => $activity->id]) }}"
                                                     class="btn btn-sm btn-outline-danger">

@@ -11,6 +11,7 @@ use App\Models\Speaker;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -46,12 +47,24 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        $event = $request->except(['speakers', 'activities', 'sponsors']);
+        $event = $request->except(['activities', 'sponsors']);
+
+        $event['start_date'] = date('Y-m-d H:i:s', strtotime($request->start_date));
+        $event['end_date'] = date('Y-m-d H:i:s', strtotime($request->end_date));
+        $event['job_call_start_date'] = date('Y-m-d H:i:s', strtotime($request->job_call_start_date));
+        $event['job_call_and_date'] = date('Y-m-d H:i:s', strtotime($request->job_call_and_date));
+        $event['announce_schedule_start_date'] = date('Y-m-d H:i:s', strtotime($request->announce_schedule_start_date));
+        $event['announce_schedule_and_date'] = date('Y-m-d H:i:s', strtotime($request->announce_schedule_and_date));
+        $event['certificates_issuance_start_date'] = date('Y-m-d H:i:s', strtotime($request->certificates_issuance_start_date));
+        $event['certificates_issuance_end_date'] = date('Y-m-d H:i:s', strtotime($request->certificates_issuance_end_date));
+        $event['subscription_issuance_start_date'] = date('Y-m-d H:i:s', strtotime($request->subscription_issuance_start_date));
+        $event['subscription_issuance_end_date'] = date('Y-m-d H:i:s', strtotime($request->subscription_issuance_end_date));
+        $event['subscription_issuance_end_date'] = date('Y-m-d H:i:s', strtotime($request->subscription_issuance_end_date));
         $event['user_id'] = Auth::user()->id;
 
         $activities = $request->input('activities');
         $sponsors = $request->input('sponsors');
-        
+
         $eventCreated = Event::create($event);
         $eventCreated->sponsors()->sync($sponsors);
         $eventCreated->activities()->sync($activities);
@@ -65,14 +78,43 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Request $request)
     {
-        $search = 'flisol-vale-2022';
+        $slugFromUrl = "/$request->name/$request->year/$request->edition";
 
-        $event = Event::where('slug', '=', $search)->first();
+        $event = Event::with(['activities.speaker', 'sponsors'])
+            ->where('slug', '=', $slugFromUrl)
+            ->first();
+
+        $activities = DB::table('activities')
+            ->join('speakers', 'speakers.id', '=', 'activities.speaker_id')
+            ->join('spaces', 'spaces.id', '=', 'activities.space_id')
+            ->join('activity_event', 'activities.id', '=', 'activity_event.activity_id')
+            ->join('events', 'events.id', '=', 'activity_event.event_id')
+            ->select(
+                'activities.*',
+                'activities.name AS activity_name',
+                'speakers.*',
+                'speakers.name AS speaker_name',
+                'spaces.*',
+                'spaces.name AS space_name'
+            )
+            ->where('events.id', '=', $event->id)
+            ->orderBy('activities.date', 'asc')
+            ->get();
+
+        $speakersUnique = [];
+
+        foreach ($event->activities as $activity) {
+            if (!in_array($activity->speaker, $speakersUnique)) {
+                $speakersUnique[] = $activity->speaker;
+            }
+        }
 
         return view('event-index', [
-            'event' => $event
+            'event' => $event,
+            'activities' => $activities,
+            'speakers' => $speakersUnique,
         ]);
     }
 
@@ -112,13 +154,26 @@ class EventController extends Controller
             'place' => $request->place,
             'year' => $request->year,
             'edition' => $request->edition,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date
+            'start_date' => date('Y-m-d H:i:s', strtotime($request->start_date)),
+            'end_date' => date('Y-m-d H:i:s', strtotime($request->end_date)),
+            'job_call_start_date' => date('Y-m-d H:i:s', strtotime($request->job_call_start_date)),
+            'job_call_and_date' => date('Y-m-d H:i:s', strtotime($request->job_call_and_date)),
+            'announce_schedule_start_date' => date('Y-m-d H:i:s', strtotime($request->announce_schedule_start_date)),
+            'announce_schedule_and_date' => date('Y-m-d H:i:s', strtotime($request->announce_schedule_and_date)),
+            'certificates_issuance_start_date' => date('Y-m-d H:i:s', strtotime($request->certificates_issuance_start_date)),
+            'certificates_issuance_end_date' => date('Y-m-d H:i:s', strtotime($request->certificates_issuance_end_date)),
+            'subscription_issuance_start_date' => date('Y-m-d H:i:s', strtotime($request->subscription_issuance_start_date)),
+            'subscription_issuance_end_date' => date('Y-m-d H:i:s', strtotime($request->subscription_issuance_end_date)),
+            'subscription_issuance_end_date' => date('Y-m-d H:i:s', strtotime($request->subscription_issuance_end_date)),
+            'link_registrations' => $request->link_registrations,
+            'link_schedule' => $request->link_schedule,
+            'link_certificates' => $request->link_certificates,
+            'link_photos' => $request->link_photos,
         ]);
-        
+
         $activities = $request->input('activities');
         $sponsors = $request->input('sponsors');
-        
+
         $eventUpdate->sponsors()->sync($sponsors);
         $eventUpdate->activities()->sync($activities);
 
