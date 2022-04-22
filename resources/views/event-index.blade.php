@@ -46,7 +46,7 @@
                     $event->subscription_issuance_start_date <= date('d-m-Y H:i:s')
                     && !empty($event->link_registrations)
                 )
-                    <a class="btn solid-blue" href="{{ $event->link_registration }}">Inscreva-se</a>
+                    <a class="btn solid-blue" href="{{ $event->link_registrations }}">Inscreva-se</a>
                 @endif
                 @if (date('d-m-Y H:i:s') > $event->certificates_issuance_start_date && date('d-m-Y H:i:s') <= $event->certificates_issuance_end_date)
                     <a class="btn line-black" href="{{ $event->link_certificates }}">Emitir certificar</a>
