@@ -100,6 +100,7 @@ class EventController extends Controller
                 'spaces.name AS space_name'
             )
             ->where('events.id', '=', $event->id)
+            ->whereNull('activities.deleted_at')
             ->orderBy('activities.date', 'asc')
             ->get();
 
