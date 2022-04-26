@@ -43,16 +43,20 @@
             </div>
             <div class="buttons">
                 @if (
-                    $event->subscription_issuance_start_date <= date('d-m-Y H:i:s')
+                    date('d-m-Y H:i:s') >= $event->subscription_issuance_start_date
+                    && date('d-m-Y H:i:s') <= $event->subscription_issuance_end_date
                     && !empty($event->link_registrations)
                 )
                     <a class="btn solid-blue" href="{{ $event->link_registrations }}">Inscreva-se</a>
                 @endif
-                @if (date('d-m-Y H:i:s') > $event->certificates_issuance_start_date && date('d-m-Y H:i:s') <= $event->certificates_issuance_end_date)
+                @if (
+                    date('d-m-Y H:i:s') >= $event->certificates_issuance_start_date 
+                    && !empty($event->link_certificates)
+                )
                     <a class="btn line-black" href="{{ $event->link_certificates }}">Emitir certificar</a>
                 @endif
                 @if (
-                    date('d-m-Y H:i:s') > $event->certificates_issuance_start_date 
+                    date('d-m-Y H:i:s') >= $event->certificates_issuance_start_date 
                     && date('d-m-Y H:i:s') <= $event->certificates_issuance_end_date
                     && !empty($event->link_certificates)
                 )
