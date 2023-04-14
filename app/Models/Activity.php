@@ -19,6 +19,7 @@ class Activity extends Model
         'date',
         'observations',
         'status',
+        'order',
         'speaker_id',
         'space_id',
         'user_id',

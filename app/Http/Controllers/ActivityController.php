@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Http\Requests\StoreActivityRequest;
 use App\Http\Requests\UpdateActivityRequest;
+use App\Http\Requests\SortableActivityRequest;
 use App\Models\Space;
 use App\Models\Speaker;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +21,11 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        return view('activities-list', ['activities' => Activity::with(['speaker','space'])->get()]);
+        return view('activities-list', [
+            'activities' => Activity::with(['speaker', 'space'])
+                ->orderBy('activities.position', 'asc')
+                ->get()
+            ]);
     }
 
     /**
@@ -102,6 +108,34 @@ class ActivityController extends Controller
         ]);
 
         return redirect()->route('activities');
+    }
+
+    /**
+     * Sortable activities list.
+     *
+     * @param  \App\Http\Requests\SortableActivityRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function sortable(SortableActivityRequest $request)
+    {
+        try {
+            $activities = Activity::all();
+
+            foreach ($activities as $activity) {
+                foreach ($request->order as $item) {
+                    if ($activity->id == $item['id']) {
+                        $result = $activity::where('id', $activity->id)->update(['position' => intval($item['position'])]);
+
+                        $result = $result;
+                    }
+                }
+            }
+
+            return response(['error' => false]);
+        } catch (Exception $e) {
+            return response(['error' => true, 'error-msg' => $e->getMessage()], 404);
+        }
+        
     }
 
     /**

@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label for="duration">Duração</label>
                                     <input type="time" class="form-control" id="duration" name="duration"
-                                        aria-describedby="durationHelper" value="{{ date('h:m', strtotime($activity->duration)) }}" placeholder="" required>
+                                        aria-describedby="durationHelper" value="{{ $activity->duration }}" placeholder="" required>
                                     <small id="durationHelper" class="form-text text-muted">E.: 00:50</small>
                                 </div>
                                 <div class="form-group">

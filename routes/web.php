@@ -88,6 +88,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/store', [ActivityController::class, 'store'])->name('store');
             Route::get('/edit/{id}', [ActivityController::class, 'edit'])->name('edit');
             Route::post('/update/{id}', [ActivityController::class, 'update'])->name('update');
+            Route::post('/sortable', [ActivityController::class, 'sortable'])->name('sortable');
             Route::get('/destroy/{id}', [ActivityController::class, 'destroy'])->name('destroy');
         });
     });
