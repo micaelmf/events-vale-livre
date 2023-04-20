@@ -7,11 +7,9 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Activity;
 use App\Models\Address;
-use App\Models\Speaker;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -82,40 +80,12 @@ class EventController extends Controller
     {
         $slugFromUrl = "/$request->name/$request->year/$request->edition";
 
-        $event = Event::with(['activities.speaker', 'sponsors'])
-            ->where('slug', '=', $slugFromUrl)
-            ->first();
-
-        $activities = DB::table('activities')
-            ->join('speakers', 'speakers.id', '=', 'activities.speaker_id')
-            ->join('spaces', 'spaces.id', '=', 'activities.space_id')
-            ->join('activity_event', 'activities.id', '=', 'activity_event.activity_id')
-            ->join('events', 'events.id', '=', 'activity_event.event_id')
-            ->select(
-                'activities.*',
-                'activities.name AS activity_name',
-                'speakers.*',
-                'speakers.name AS speaker_name',
-                'spaces.*',
-                'spaces.name AS space_name'
-            )
-            ->where('events.id', '=', $event->id)
-            ->whereNull('activities.deleted_at')
-            ->orderBy('activities.date', 'asc')
-            ->get();
-
-        $speakersUnique = [];
-
-        foreach ($event->activities as $activity) {
-            if (!in_array($activity->speaker, $speakersUnique)) {
-                $speakersUnique[] = $activity->speaker;
-            }
-        }
+        $event = Event::with(['address', 'sponsors'])->where('slug', '=', $slugFromUrl)->first();
+        $activities = Activity::with(['speaker'])->get()->unique('speaker.id');
 
         return view('event-index', [
-            'event' => $event,
             'activities' => $activities,
-            'speakers' => $speakersUnique,
+            'event' => $event
         ]);
     }
 

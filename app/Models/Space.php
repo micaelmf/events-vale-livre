@@ -16,4 +16,12 @@ class Space extends Model
         'address_id',
         'user_id'
     ];
+
+    /**
+     * Get the activities for the space.
+     */
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
 }

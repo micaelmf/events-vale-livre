@@ -8,9 +8,11 @@ use App\Http\Requests\UpdateActivityRequest;
 use App\Http\Requests\SortableActivityRequest;
 use App\Models\Space;
 use App\Models\Speaker;
+use App\Services\ActivityService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ActivityController extends Controller
 {
@@ -19,13 +21,28 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $spaces = DB::table('spaces')
+            ->select('spaces.*')
+            ->rightJoin('activities', 'spaces.id', '=', 'activities.space_id')
+            ->whereNull('activities.deleted_at')
+            ->groupBy('activities.space_id')
+            ->get();
+
+        $filters = $request->all();
+        $filteredSpace = $filters['spaces'] ?? $spaces[0]->id;
+
+        $activities = Activity::with(['speaker', 'space'])
+            ->where('activities.space_id', $filteredSpace)
+            ->orderBy('activities.position', 'asc')
+            ->get();
+
         return view('activities-list', [
-            'activities' => Activity::with(['speaker', 'space'])
-                ->orderBy('activities.position', 'asc')
-                ->get()
-            ]);
+            'activities' => $activities,
+            'spaces' => $spaces,
+            'filteredSpace' => $filteredSpace
+        ]);
     }
 
     /**
@@ -119,23 +136,40 @@ class ActivityController extends Controller
     public function sortable(SortableActivityRequest $request)
     {
         try {
-            $activities = Activity::all();
+            $activitiesToSort = Activity::where('space_id', $request->space)->orderBy('position', 'asc')->get();
 
-            foreach ($activities as $activity) {
+            foreach ($activitiesToSort as $activity) {
                 foreach ($request->order as $item) {
                     if ($activity->id == $item['id']) {
-                        $result = $activity::where('id', $activity->id)->update(['position' => intval($item['position'])]);
-
-                        $result = $result;
+                        $result = Activity::where('id', $activity->id)->update(['position' => intval($item['position'])]);
                     }
                 }
+            }
+
+            $activityService = new ActivityService();
+            $activitiesFromSpace = Activity::with(['space'])->where('space_id', $request->space)->orderBy('position', 'asc')->get();
+
+            $previusHour = $activitiesToSort->toArray()[0]['date'];
+
+            foreach ($activitiesFromSpace as $activity) {
+                if ($activity->space->id != $request->space) {
+                    continue;
+                }
+
+                $timeCurrent = $activityService->addMinutes(
+                    $previusHour,
+                    $activityService->convertToMinutes($activity->duration)
+                );
+
+                Activity::where('id', $activity->id)->update(['date' => $previusHour]);
+
+                $previusHour = $timeCurrent;
             }
 
             return response(['error' => false]);
         } catch (Exception $e) {
             return response(['error' => true, 'error-msg' => $e->getMessage()], 404);
         }
-        
     }
 
     /**

@@ -19,4 +19,20 @@ class Address extends Model
         'city',
         'user_id'
     ];
+
+    /**
+     * Get the spaces for the event.
+     */
+    public function spaces()
+    {
+        return $this->hasMany(Space::class);
+    }
+
+    /**
+     * Get the events for the event.
+     */
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

@@ -69,64 +69,66 @@
             </div>
         </div>
 
-        <div id="sponsors" class="section-title">Apoio</div>
-        <div class="section sponsors">
-            @foreach ($event->sponsors as $sponsor)
-                @if ($sponsor->type == 'Realização' || $sponsor->type == 'Apoio')
-                    <div class="sponsor">
-                        <img src="{{ asset('images/sponsors') }}/{{ $sponsor->image }}" alt="">
-                        <div class="type">{{ $sponsor->type }}</div>
-                    </div>
-                @endif
-            @endforeach
+        @if (!empty($event->sponsors)) 
+            <div id="sponsors" class="section-title">Apoio</div>
+            <div class="section sponsors">
+                @foreach ($event->sponsors as $sponsor)
+                    @if ($sponsor->type == 'Realização' || $sponsor->type == 'Apoio')
+                        <div class="sponsor">
+                            <img src="{{ asset('images/sponsors') }}/{{ $sponsor->image }}" alt="">
+                            <div class="type">{{ $sponsor->type }}</div>
+                        </div>
+                    @endif
+                @endforeach
 
-            @foreach ($event->sponsors as $sponsor)
-                @if ($sponsor->type != 'Realização' && $sponsor->type != 'Apoio')
-                    <div class="sponsor">
-                        <img src="{{ asset('images/sponsors') }}/{{ $sponsor->image }}" alt="">
-                        <div class="type">{{ $sponsor->type }}</div>
-                    </div>
-                @endif
-            @endforeach
-        </div>
+                @foreach ($event->sponsors as $sponsor)
+                    @if ($sponsor->type != 'Realização' && $sponsor->type != 'Apoio')
+                        <div class="sponsor">
+                            <img src="{{ asset('images/sponsors') }}/{{ $sponsor->image }}" alt="">
+                            <div class="type">{{ $sponsor->type }}</div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        @endif
 
         <div id="speakers" class="section-title">Palestrantes</div>
         <div class="section speakers">
-            @foreach ($speakers as $speaker)
+            @foreach ($activities as $activity)
                 <div class="speaker">
                     <div>
-                        <img src="{{ asset('images/speakers') }}/{{ $speaker->photo }}"
-                            alt="Imagem do palestrante {{ $speaker->name }}">
+                        <img src="{{ asset('images/speakers') }}/{{ $activity->speaker->photo }}"
+                            alt="Imagem do palestrante {{ $activity->speaker->name }}">
                     </div>
-                    <div class="name"><strong>{{ $speaker->name }}</strong></div>
-                    <div class="bio">{{ $speaker->bio }}</div>
+                    <div class="name"><strong>{{ $activity->speaker->name }}</strong></div>
+                    <div class="bio">{{ $activity->speaker->bio }}</div>
                     <div class="links">
-                        @if ($speaker->link_github)
-                            <a href="https://github.com/{{ $speaker->link_github }}" ><i
+                        @if ($activity->speaker->link_github)
+                            <a href="https://github.com/{{ $activity->speaker->link_github }}" ><i
                                     class="uil uil-github"></i></a>
                         @endif
-                        @if ($speaker->link_linkedin)
-                            <a href="https://www.linkedin.com/in/{{ $speaker->link_linkedin }}" ><i
+                        @if ($activity->speaker->link_linkedin)
+                            <a href="https://www.linkedin.com/in/{{ $activity->speaker->link_linkedin }}" ><i
                                     class="uil uil-linkedin"></i></a>
                         @endif
-                        @if ($speaker->link_instagram)
-                            <a href="https://www.instagram.com/{{ $speaker->link_instagram }}" ><i
+                        @if ($activity->speaker->link_instagram)
+                            <a href="https://www.instagram.com/{{ $activity->speaker->link_instagram }}" ><i
                                     class="uil uil-instagram-alt"></i></a>
                         @endif
-                        @if ($speaker->link_twitter)
-                            <a href="https://twitter.com/{{ $speaker->link_twitter }}" ><i
+                        @if ($activity->speaker->link_twitter)
+                            <a href="https://twitter.com/{{ $activity->speaker->link_twitter }}" ><i
                                     class="uil uil-twitter"></i></a>
                         @endif
-                        @if ($speaker->link_youtube)
-                            <a href="https://www.youtube.com/c/{{ $speaker->link_youtube }}" ><i
+                        @if ($activity->speaker->link_youtube)
+                            <a href="https://www.youtube.com/c/{{ $activity->speaker->link_youtube }}" ><i
                                     class="uil uil-youtube"></i></a>
                         @endif
-                        @if ($speaker->link_medium)
-                            <a href="https://medium.com/{{ $speaker->link_medium }}" ><i
+                        @if ($activity->speaker->link_medium)
+                            <a href="https://medium.com/{{ $activity->speaker->link_medium }}" ><i
                                     class="uil uil-medium-m"></i></a>
                         @endif
-                        @if ($speaker->link_facebook)
-                            <a href="https://www.facebook.com/{{ $speaker->link_facebook }}" ><i
+                        @if ($activity->speaker->link_facebook)
+                            <a href="https://www.facebook.com/{{ $activity->speaker->link_facebook }}" ><i
                                     class="uil uil-facebook"></i></a>
                         @endif
                     </div>
@@ -136,24 +138,27 @@
 
         <div id="schedule" class="section-title">Agenda</div>
         <div class="section schedule">
-            <div class="schedule-container">
-                <div class="header">
-                    <div class="hour">Horário</div>
-                    <div class="hour">Duração</div>
-                    <div class="speaker">Palestrate</div>
-                    <div class="activity">Atividade</div>
-                    <div class="local">Local</div>
-                </div>
-                @foreach ($activities as $activity)
-                    <div class="line">
-                        <div class="hour">{{ date('H:i', strtotime($activity->date)) }}</div>
-                        <div class="duration">{{ date('H:i', strtotime($activity->duration)) }}</div>
-                        <div class="speaker">{{ $activity->speaker_name }}</div>
-                        <div class="activity">{{ $activity->activity_name }}</div>
-                        <div class="local">{{ $activity->space_name }}</div>
+            @foreach ($event->address->spaces as $space)
+                @if (count($space->activities) > 0)
+                    <div class="schedelude-title">{{ $space->name }}</div>
+                    <div class="schedule-container">
+                        <div class="header">
+                            <div class="hour">Duração</div>
+                            <div class="speaker">Palestrate</div>
+                            <div class="activity">Atividade</div>
+                            <div class="local">Local</div>
+                        </div>
+                        @foreach ($space->activities as $activity)
+                            <div class="line">
+                                <div class="duration">{{ date('H:i', strtotime($activity->duration)) }}</div>
+                                <div class="speaker">{{ $activity->speaker->name }}</div>
+                                <div class="activity">{{ $activity->name }}</div>
+                                <div class="local">{{ $space->name }}</div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
-            </div>
+                @endif
+            @endforeach
         </div>
 
         <footer class="mastfoot mt-auto">

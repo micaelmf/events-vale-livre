@@ -11,7 +11,16 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="row">
                         <div class="col col-md-2">
-                            <a href="{{ route('activity.create') }}" class="btn btn-sm btn-primary">Novo</a>
+                            <form id="filter" action="" method="get">
+                                <select name="spaces" id="space">
+                                    <option value="">Selecione o Espaço</option>
+                                    @foreach ($spaces as $space)
+                                        <option value="{{ $space->id }}" {{ $filteredSpace == $space->id ? 'selected' : '' }}>{{ $space->name }}</option>
+                                    @endforeach
+                                </select>
+                                <button class="btn btn-sm btn-secondary" type="submit">Filtrar</button>
+                            </form>
+                            <a href="{{ route('activity.create') }}" class="btn btn-sm btn-primary">Nova Atividade</a>
                         </div>
                     </div>
                 </div>
@@ -22,6 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Duração</th>
                                         <th scope="col">Nome</th>
                                         <th scope="col">Tipo</th>
                                         <th scope="col">Status</th>
@@ -32,8 +42,9 @@
                                 </thead>
                                 <tbody id="table-content">
                                     @foreach ($activities as $activity)
-                                        <tr id="{{ $activity->id }}">
+                                        <tr id="{{ $activity->id }}" space="{{ $activity->space_id }}">
                                             <th scope="row">{{ $activity->position }}</th>
+                                            <td>{{ $activity->date }}</td>
                                             <td>{{ $activity->name }}</td>
                                             <td>{{ $activity->type }}</td>
                                             <td>{{ $activity->status }}</td>
@@ -74,7 +85,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         toastr.options = {
-            "closeButton": true,
+            "closeButton": false,
             "debug": false,
             "newestOnTop": false,
             "progressBar": true,
@@ -90,7 +101,7 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         }
-        
+
         $("#table").DataTable();
         $("#table-content").sortable({
             items: "tr",
@@ -98,20 +109,21 @@
             opacity: 0.6,
             update: function() {
                 sendOrderToServer();
-
             }
         });
 
         function sendOrderToServer() {
-            var order = [];
-            var token = $('meta[name="csrf-token"]').attr('content');
+            let order = [];
+            let space = null;
+            let token = $('meta[name="csrf-token"]').attr('content');
 
             $('tbody>tr').each(function(index, element) {
+                space = $(this).attr('space')
+
                 order.push({
                     id: $(this).attr('id'),
                     position: index + 1
                 });
-
             });
 
             $.ajax({
@@ -120,12 +132,21 @@
                 url: "{{ route('activity.sortable') }}",
                 data: {
                     order: order,
+                    space: space,
                     _token: token
                 },
+                beforeSend: function() {
+                    toastr.options.timeOut = 0
+                    toastr["info"]("Aguarde...")
+                },
                 success: function(response) {
+                    toastr.options.timeOut = 1000
+                    toastr.clear()
                     toastr["success"]("Ordem atualizada com sucesso!")
                 },
                 error: function(response) {
+                    toastr.options.timeOut = 1000
+                    toastr.clear()
                     toastr["error"]("Erro ao ordenar!")
                 }
             });

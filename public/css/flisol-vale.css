@@ -132,13 +132,20 @@ header {
   color: black;
 }
 
+.schedelude-title {
+  font-size: 22px;
+  text-align: center;
+}
+
 .schedule-container {
   display: grid;
+  padding-top: 16px;
+  padding-bottom: 64px;
 }
 
 .schedule-container > .header, .schedule-container > .line {
   display: grid;
-  grid-template-columns: minmax(60px, 1fr) minmax(60px, 1fr) minmax(160px, 1fr) minmax(240px, 3fr) minmax(140px, 1fr);
+  grid-template-columns: minmax(60px, 1fr) minmax(160px, 1fr) minmax(240px, 3fr) minmax(140px, 1fr);
 }
 
 .schedule-container .header {

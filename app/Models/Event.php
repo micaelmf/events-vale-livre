@@ -51,4 +51,12 @@ class Event extends Model
         return $this->belongsToMany(Activity::class)
             ->withTimestamps();
     }
+
+    /**
+     * Get the address that owns the event.
+     */
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
 }
